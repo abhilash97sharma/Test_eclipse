@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>CSV_Table</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.0/footable.standalone.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.0/footable.core.bootstrap.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.0/footable.js"></script> -->
+    
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        
+    </script>
+<style>
+ table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: "1";
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  height:20px;
+  width:100px;
+  top: 50%;
+}
+.button4 {border-radius: 12px;}
+</style>
+</head>
+<body>
+    <label>Query to Search</label>
+    <input type="text" id="txt1" onKeyup="myfilter()" /><br></br>
+	<div id="div1" style="background-color:lightblue;text-align:center;"></div>
+	<input type="button" class="button button4" name="click" id="btn1" value="click"/>
+	<script type="text/javascript">
+		$(document).ready(
+			    
+				function() {
+				
+					//	 alert('In the javascript code');
+					if (window.XMLHttpRequest)
+						obj = new XMLHttpRequest();
+					else
+						obj = new ActiveXObject("Microsoft.XMLHTTP");
+					obj.open("GET",
+							"http://localhost:2016/Ajax_Test/Second_Servlet",
+							true);
+					obj.send();
+					obj.onreadystatechange = function() {
+						if (obj.readyState == 4 && obj.status == 200) {
+							output = obj.responseText;
+							//	 console.log(obj.responseText);
+							var table = '<table>';
+							// By lines
+							var lines = output.split('\n');
+									output1 = lines;
+							var out = '';
+							for (var line = 0; line < lines.length; line++) {
+								table += '<tr>';
+								if (line == 0)
+									table += '<th>checkbox</th>';
+								else {
+									table += '<td><input type="checkbox"'
+											+ line + ' value='
+											+ lines[line].replace(/ /g, "+")
+											+ '></td>';
+									console.log(lines[line]);
+								}
+								out1 = lines[line].split(',').length;
+								out2 = lines[line].split(',');
+								for (var i1 = 0; i1 < out1; i1++) {
+									if (line == 0) {
+										table += '<th>' + out2[i1] + '</th>';
+									} else {
+										table += '<td>' + out2[i1] + '</td>';
+									}
+						
+								}
+								table += '</tr>';
+							}
+
+							table += '</table>'
+							document.getElementById('div1').innerHTML = table;
+						}
+					}
+				});
+		
+		$('#btn1').click(function() {
+			window.alert('data saved successfully');
+			$(':checkbox:checked').each(function() {
+				var id = this.value.replace(/[\\+]/g, " ");
+				var jsondata = JSON.stringify(id);
+
+				$.ajax({
+					    url: "http://localhost:2016/Ajax_Test/Third_Servlet",
+						data: {'data1': jsondata}
+				});
+				console.log(id);
+			});
+		});
+		
+		function myfilter(){
+			 //  document.write(output);
+			     var txt1 = document.getElementById('txt1').value;
+				 var table='<table>'
+				 var heading = output1[0].split(',');
+				 table+='<tr>';
+				 table+='<th>checkbox</th>';
+				 for(var i1=0;i1<heading.length;i1++){
+				    table+='<th>'+heading[i1]+'</th>';
+				 }
+				 table+='</tr>';
+				 for(var line = 1; line < output1.length; line++){
+				   if(output1[line].includes(txt1)){
+				     table+='<tr>';
+			         out1 = output1[line].split(',').length;
+			         out2 = output1[line].split(',');
+			         table+='<td><input type="checkbox"'+line+' value='+output1[line].replace(/ /g, "+")+'></td>'
+				     for(var i1=0;i1 < out1;i1++){
+				           table+='<td>'+out2[i1]+'</td>';
+				    }
+				      table+='</tr>';
+				   }
+				 }
+				 table+='</table>';
+				 document.getElementById('div1').innerHTML=table;
+			}
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ajax_Test</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+<div id='div1'>Hello</div>
+<script type="text/javascript">
+ $(document).ready(function(){
+//	 alert('In the javascript code');
+	 if(window.XMLHttpRequest)
+		 obj = new XMLHttpRequest();
+	 else
+		 obj = new ActiveXObject("Microsoft.XMLHTTP");
+	 obj.open("GET","http://localhost:2016/Ajax_Test/First_Servlet",true);
+	 obj.send();
+	 obj.onreadystatechange = function(){
+		 if(obj.readyState == 4 && obj.status == 200)
+			 document.getElementById('div1').innerHTML = obj.responseText;
+	 }
+ });
+</script>
+</body>
+</html>

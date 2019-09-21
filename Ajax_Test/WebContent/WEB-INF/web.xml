@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Ajax_Test</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>First_Servlet</display-name>
+    <servlet-name>First_Servlet</servlet-name>
+    <servlet-class>package1.First_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>First_Servlet</servlet-name>
+    <url-pattern>/First_Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Second_Servlet</display-name>
+    <servlet-name>Second_Servlet</servlet-name>
+    <servlet-class>package1.Second_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Second_Servlet</servlet-name>
+    <url-pattern>/Second_Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Third_Servlet</display-name>
+    <servlet-name>Third_Servlet</servlet-name>
+    <servlet-class>package1.Third_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Third_Servlet</servlet-name>
+    <url-pattern>/Third_Servlet</url-pattern>
+  </servlet-mapping>
+</web-app>
