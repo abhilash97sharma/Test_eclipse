@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Matching</title>
+<script type="text/javascript">
+ function my(){
+	    var str=document.getElementById('txt1').value;
+	    if (window.XMLHttpRequest)
+	     obj = new XMLHttpRequest();
+	    else
+	     obj = new ActiveXObject("Microsoft.XMLHTTP");
+	       obj.onreadystatechange=fun;
+	       obj.open("GET","DateServlet?txt1="+str,true);
+	       obj.send();
+	   function fun(){
+		  if(obj.readyState==4){
+			//  document.getElementById('div1').innerHTML=document.getElementById('txt1').value;
+			    document.getElementById('div1').innerHTML=obj.responseText;
+		  } 
+	   }
+ }
+</script>
+</head>
+<body>
+<input type="text" id="txt1" name="txt1" oninput="my()">
+<div id="div1"></div>
+</body>
+</html>

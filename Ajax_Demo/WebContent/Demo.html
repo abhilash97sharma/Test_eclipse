@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>MyAjax</title>
+<script type="text/javascript">
+ function demoajax(){
+//  var obj=new XMLHttpRequest();
+  if (window.XMLHttpRequest)
+    {
+        obj = new XMLHttpRequest();
+    }
+    else
+    {
+        obj = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+ // document.write('Hello Abhilash');
+  obj.onreadystatechange=funresponse;
+  obj.open("GET","Date.jsp",true);
+//  document.write('Above send');
+  obj.send();
+ }
+ function funresponse(){
+  // document.write('Good morning<br>');
+ //  document.write(obj.readyState +'<br>');
+  if(obj.readyState==4)
+   {
+   //  document.write('In the body of funresponse<br>'); 
+       document.getElementById('currentdate').innerHTML=obj.responseText;
+	   document.getElementById('div1').innerHTML=obj.responseText;
+   }
+ }
+ </script>
+</head>
+<body bgcolor="green">
+<h2>Click the button to recieve the date from the server</h2>
+<input type="button" onclick="demoajax()" value="click me"><br><br>
+<span style="color:yellow;padding:20px;" id="currentdate"></span>
+<div id="div1" style="color:red;padding:30px;"></div>
+</body>
+</html>
